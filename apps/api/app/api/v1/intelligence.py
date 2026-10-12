@@ -5,11 +5,7 @@ from app.schemas.intelligence import IntelligenceSummary
 from app.services.ml.intelligence_engine import IntelligenceEngine
 
 
-router = APIRouter(
-    prefix="/intelligence",
-    tags=["AdFusion Intelligence"],
-)
-
+router = APIRouter(prefix="/intelligence", tags=["AdFusion Intelligence"])
 engine = IntelligenceEngine()
 
 
@@ -21,14 +17,10 @@ class CampaignIntelligenceRequest(BaseModel):
     audience_match: float = Field(ge=0, le=100)
 
 
-@router.post(
-    "/analyze",
-    response_model=IntelligenceSummary,
-)
+@router.post("/analyze", response_model=IntelligenceSummary)
 async def analyze_campaign(
     payload: CampaignIntelligenceRequest,
 ) -> IntelligenceSummary:
-
     return engine.analyze_campaign(
         ctr=payload.ctr,
         conversion_rate=payload.conversion_rate,

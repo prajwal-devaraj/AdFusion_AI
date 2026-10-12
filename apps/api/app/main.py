@@ -6,9 +6,7 @@ from app.api.v1.intelligence import router as intelligence_router
 
 app = FastAPI(
     title="AdFusion AI API",
-    description=(
-        "Autonomous multimodal advertising intelligence platform"
-    ),
+    description="Autonomous multimodal advertising intelligence platform",
     version="0.2.0",
 )
 
@@ -23,10 +21,7 @@ app.add_middleware(
     allow_headers=["*"],
 )
 
-app.include_router(
-    intelligence_router,
-    prefix="/api/v1",
-)
+app.include_router(intelligence_router, prefix="/api/v1")
 
 
 @app.get("/")

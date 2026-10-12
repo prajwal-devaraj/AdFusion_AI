@@ -18,30 +18,22 @@ export type IntelligenceSummary = {
 };
 
 export async function getCampaignIntelligence(): Promise<IntelligenceSummary> {
-  const apiUrl =
-    process.env.NEXT_PUBLIC_API_URL ?? "http://localhost:8000";
+  const apiUrl = process.env.NEXT_PUBLIC_API_URL ?? "http://localhost:8000";
 
-  const response = await fetch(
-    `${apiUrl}/api/v1/intelligence/analyze`,
-    {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify({
-        ctr: 6.4,
-        conversion_rate: 4.1,
-        roas: 4.6,
-        brand_alignment: 94,
-        audience_match: 88,
-      }),
-    }
-  );
+  const response = await fetch(`${apiUrl}/api/v1/intelligence/analyze`, {
+    method: "POST",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify({
+      ctr: 6.4,
+      conversion_rate: 4.1,
+      roas: 4.6,
+      brand_alignment: 94,
+      audience_match: 88,
+    }),
+  });
 
   if (!response.ok) {
-    throw new Error(
-      `AdFusion API request failed: ${response.status}`
-    );
+    throw new Error(`AdFusion API request failed: ${response.status}`);
   }
 
   return response.json();
